@@ -1,3 +1,3 @@
 # Series Tracker
 
-Build with 'gcc main.c -lncurses'
+Build with 'g++ main.cpp -lncurses'
