@@ -1,19 +1,16 @@
 #include <ncurses.h>
 #include "window.h"
+#include "cursesapp.h"
 
 int main()
 {
-    initscr();
-    clear();
-    noecho();
-    cbreak();
+    CursesApp app;
     
     printw("Series Tracker\n");
-    Window win(0, 0, 0, 0);
+    Window win(3, 10, 5, 5);
     refresh();
     
     getch();
-    endwin();
     return 0;
 }
 
