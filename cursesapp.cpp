@@ -7,6 +7,7 @@ CursesApp::CursesApp()
     clear();
     noecho();
     cbreak();
+    curs_set(0);
 }
 
 CursesApp::~CursesApp()

@@ -5,7 +5,6 @@
 
 class Window
 {
-    int width, height, y, x;
     WINDOW* local_win;
 
     public:
@@ -13,6 +12,7 @@ class Window
         ~Window();
 
         WINDOW* getWINDOW();
+        void show();
 };
 
 #endif
