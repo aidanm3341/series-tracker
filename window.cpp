@@ -13,6 +13,5 @@ Window::Window(int height, int width, int y, int x)
 
 Window::~Window()
 {
-    printw("window deleted\n");
     std::cout << "window deleted" << std::endl;
 }
