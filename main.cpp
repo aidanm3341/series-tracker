@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include "window.h"
 
 int main()
 {
@@ -7,11 +8,14 @@ int main()
     noecho();
     cbreak();
     
-    printw("Series Tracker");
+    printw("Series Tracker\n");
+    Window win(0, 0, 0, 0);
     refresh();
     
     getch();
     endwin();
     return 0;
 }
+
+
 
