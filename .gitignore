@@ -1,3 +1,6 @@
 *.out
 out/
+
 ncurses_programs/
+
+.vscode/
