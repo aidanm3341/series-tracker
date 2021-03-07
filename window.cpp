@@ -4,25 +4,32 @@
 
 Window::Window(int height, int width, int y, int x)
 {    
-    local_win = newwin(height, width, y, x);
-	box(local_win, 0 , 0); /* 0, 0 gives default characters 
-					        * for the vertical and horizontal
-					        * lines			                */
+    borderWindow = newwin(height, width, y, x);
+	box(borderWindow, 0 , 0);
+
+    contentWindow = newwin(height-2, width-2, y+1, x+1);
 }
 
 void Window::show()
 {
-    wrefresh(local_win); 
+    wrefresh(borderWindow); 
+    wrefresh(contentWindow);
+}
+
+void Window::print(std::string str)
+{
+    wprintw(contentWindow, ("   " + str + "\n").c_str());
 }
 
 Window::~Window()
 {
-    wborder(local_win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '); // You first have to set the border to be nothing, or it will linger
-	wrefresh(local_win);
-	delwin(local_win);
+    wborder(borderWindow, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '); // You first have to set the border to be nothing, or it will linger
+	wrefresh(borderWindow);
+	delwin(borderWindow);
+    delwin(contentWindow);
 }
 
 WINDOW* Window::getWINDOW()
 {
-	return local_win;
+	return contentWindow;
 }

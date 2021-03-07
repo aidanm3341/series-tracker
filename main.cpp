@@ -1,16 +1,26 @@
 #include <ncurses.h>
 #include "window.h"
 #include "cursesapp.h"
+#include <string>
+
+std::string title = "Series Tracker"; 
 
 int main()
 {
     CursesApp app;
+    int cols = getmaxx(stdscr);
+    int rows = getmaxy(stdscr);
 
-    printw("Series Tracker\n");
-    Window win(3, 10, 5, 5);
+    Window titleWindow(3, cols, 0, 0);
+    titleWindow.print(title);
+
+    Window seriesWindow(rows-3, cols, 3, 0);
+    seriesWindow.print("Family Guy - [X]  [X]  [ ]  [ ]");
+
     refresh();
 
-    win.show();
+    titleWindow.show();
+    seriesWindow.show();
 
     getch();
     return 0;

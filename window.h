@@ -2,10 +2,12 @@
 #define WINDOW_H
 
 #include <ncurses.h>
+#include <string>
 
 class Window
 {
-    WINDOW* local_win;
+    WINDOW* borderWindow;
+    WINDOW* contentWindow;
 
     public:
         Window(int height, int width, int y, int x);
@@ -13,6 +15,7 @@ class Window
 
         WINDOW* getWINDOW();
         void show();
+        void print(std::string str);
 };
 
 #endif
