@@ -1,8 +1,10 @@
 #include <ncurses.h>
 #include "window.h"
 #include "series.h"
+#include "seriesPrinter.h"
 #include "cursesapp.h"
 #include <string>
+#include <vector>
 
 std::string title = "Series Tracker"; 
 
@@ -33,11 +35,14 @@ int main()
 
 void generateSeriesWindow(Window &seriesWindow)
 {
-    Series familyguy("Family Guy", 7);
-    seriesWindow.print(familyguy.toString());
-
     Series phineasferb("Phineas and Ferb", 4);
-    seriesWindow.print(phineasferb.toString());
+
+    std::vector<Series> series;
+    series.push_back(Series("Family Guy", 7));
+    series.push_back(Series("Phineas and Ferb", 4));
+    
+    SeriesPrinter printer(series);
+    seriesWindow.print(printer.toString());
 }
 
 

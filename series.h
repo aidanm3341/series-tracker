@@ -12,7 +12,8 @@ class Series
         Series(std::string name, int noOfSeries);
         ~Series();
 
-        std::string toString();
+        std::string getName();
+        int getNoOfSeries();
 };
 
 #endif

@@ -1,22 +1,18 @@
 #include "series.h"
 
-Series::Series(std::string name, int noOfSeries)
-{
-    this->name = name;
-    this->noOfSeries = noOfSeries;
-}
+Series::Series(std::string n, int numSeries) : name(n), noOfSeries(numSeries) {}
 
 Series::~Series()
 {
 
 }
 
-std::string Series::toString()
+std::string Series::getName()
 {
-    std::string output = name + " -";
-    for (size_t i = 0; i < noOfSeries; i++)
-    {
-        output += "  [ ]";
-    }
-    return output;
+    return name;
+}
+
+int Series::getNoOfSeries()
+{
+    return noOfSeries;
 }

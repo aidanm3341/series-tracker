@@ -7,7 +7,7 @@ Window::Window(int height, int width, int y, int x)
     borderWindow = newwin(height, width, y, x);
 	box(borderWindow, 0 , 0);
 
-    contentWindow = newwin(height-2, width-2, y+1, x+1);
+    contentWindow = newwin(height-2, width-5, y+1, x+3);
 }
 
 void Window::show()
@@ -18,7 +18,7 @@ void Window::show()
 
 void Window::print(std::string str)
 {
-    wprintw(contentWindow, ("   " + str + "\n").c_str());
+    wprintw(contentWindow, (str + "\n").c_str());
 }
 
 Window::~Window()
