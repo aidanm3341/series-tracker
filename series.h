@@ -5,15 +5,15 @@
 
 class Series
 {
-    std::string name;
-    int noOfSeries;
+    const std::string name;
+    const int noOfSeries;
 
     public:
         Series(std::string name, int noOfSeries);
         ~Series();
 
-        std::string getName();
-        int getNoOfSeries();
+        const std::string getName();
+        const int getNoOfSeries();
 };
 
 #endif

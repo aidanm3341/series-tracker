@@ -7,12 +7,12 @@ Series::~Series()
 
 }
 
-std::string Series::getName()
+const std::string Series::getName()
 {
     return name;
 }
 
-int Series::getNoOfSeries()
+const int Series::getNoOfSeries()
 {
     return noOfSeries;
 }
