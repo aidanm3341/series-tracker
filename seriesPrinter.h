@@ -7,14 +7,14 @@
 
 class SeriesPrinter
 {
-    std::vector<Series> series;
+    const std::vector<Series> series;
     int maxNameLength;
 
     std::string createWatchedBoxesString(int noOfSeries);
 
     public:
         SeriesPrinter(std::vector<Series> series);
-        std::string toString();
+        const std::string toString();
 };
 
 #endif

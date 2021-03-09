@@ -3,25 +3,25 @@
 
 SeriesPrinter::SeriesPrinter(std::vector<Series> srs) : series(srs), maxNameLength(0)
 {
-    for (size_t i = 0; i < series.size(); i++)
+    for (Series s : series)
     {
-        if(series[i].getName().length() > maxNameLength)
-            maxNameLength = series[i].getName().length();
+        if(s.getName().length() > maxNameLength)
+            maxNameLength = s.getName().length();
     }
-    
 }
 
 std::string SeriesPrinter::createWatchedBoxesString(int noOfSeries)
 {
-    std::string output = "  ";
+    std::stringstream output;
+    output << "   ";
     for (size_t i = 0; i < noOfSeries; i++)
     {
-        output += "[ ]  ";
+        output << "[ ]  ";
     }
-    return output;
+    return output.str();
 }
 
-std::string SeriesPrinter::toString()
+const std::string SeriesPrinter::toString()
 {
     std::stringstream output;
     for (Series s : series)
