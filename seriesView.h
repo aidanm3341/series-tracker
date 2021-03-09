@@ -5,15 +5,16 @@
 #include "series.h"
 #include <string>
 
-class SeriesPrinter
+class SeriesView
 {
     const std::vector<Series> series;
     int maxNameLength;
+    int activeItem;
 
-    std::string createWatchedBoxesString(int noOfSeries);
+    std::string createWatchedBoxesString(Series s);
 
     public:
-        SeriesPrinter(std::vector<Series> series);
+        SeriesView(std::vector<Series> series);
         const std::string toString();
 };
 

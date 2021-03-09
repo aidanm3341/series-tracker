@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include "window.h"
 #include "series.h"
-#include "seriesPrinter.h"
+#include "seriesView.h"
 #include "cursesapp.h"
 #include <string>
 #include <vector>
@@ -40,8 +40,10 @@ void generateSeriesWindow(Window &seriesWindow)
     std::vector<Series> series;
     series.push_back(Series("Family Guy", 7));
     series.push_back(Series("Phineas and Ferb", 4));
+
+    series[0].setHaveWatched(2, true);
     
-    SeriesPrinter printer(series);
+    SeriesView printer(series);
     seriesWindow.print(printer.toString());
 }
 

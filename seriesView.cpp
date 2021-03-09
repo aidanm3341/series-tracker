@@ -1,7 +1,7 @@
-#include "seriesPrinter.h"
+#include "seriesView.h"
 #include "sstream"
 
-SeriesPrinter::SeriesPrinter(std::vector<Series> srs) : series(srs), maxNameLength(0)
+SeriesView::SeriesView(std::vector<Series> srs) : series(srs), maxNameLength(0), activeItem(0)
 {
     for (Series s : series)
     {
@@ -10,25 +10,28 @@ SeriesPrinter::SeriesPrinter(std::vector<Series> srs) : series(srs), maxNameLeng
     }
 }
 
-std::string SeriesPrinter::createWatchedBoxesString(int noOfSeries)
+std::string SeriesView::createWatchedBoxesString(Series s)
 {
     std::stringstream output;
     output << "   ";
-    for (size_t i = 0; i < noOfSeries; i++)
+    for (size_t i = 0; i < s.getNoOfSeries(); i++)
     {
-        output << "[ ]  ";
+        if(s.haveWatchedSeries(i))
+            output << "[X]  ";
+        else
+            output << "[ ]  ";
     }
     return output.str();
 }
 
-const std::string SeriesPrinter::toString()
+const std::string SeriesView::toString()
 {
     std::stringstream output;
     for (Series s : series)
     {
         output << s.getName()
                << std::string(maxNameLength - s.getName().length(), ' ') 
-               << createWatchedBoxesString(s.getNoOfSeries())
+               << createWatchedBoxesString(s)
                << "\n";
     }
     
