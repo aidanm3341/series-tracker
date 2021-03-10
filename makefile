@@ -5,7 +5,7 @@
 CC=g++
 LIBS=-lncurses
 
-EXE_DIR=out
+EXE_DIR=.
 EXE=series_tracker
 
 EXE_PATH=${EXE_DIR}/${EXE}
