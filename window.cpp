@@ -16,9 +16,9 @@ void Window::show()
     wrefresh(contentWindow);
 }
 
-void Window::print(std::string str)
+void Window::print(const char * str)
 {
-    wprintw(contentWindow, (str + "\n").c_str());
+    wprintw(contentWindow, str);
 }
 
 Window::~Window()
@@ -29,7 +29,8 @@ Window::~Window()
     delwin(contentWindow);
 }
 
-WINDOW* Window::getWINDOW()
+Window& operator<<(Window& win, const char * str)
 {
-	return contentWindow;
+    win.print(str);
+    return win;
 }

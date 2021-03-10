@@ -13,9 +13,10 @@ class Window
         Window(int height, int width, int y, int x);
         ~Window();
 
-        WINDOW* getWINDOW();
         void show();
-        void print(std::string str);
+        void print(const char * str);
 };
+
+Window& operator<<(Window& win, const char * str);
 
 #endif

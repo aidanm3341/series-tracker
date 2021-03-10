@@ -19,7 +19,7 @@ int main()
     rows = getmaxy(stdscr);
 
     Window titleWindow(3, cols, 0, 0);
-    titleWindow.print(title);
+    titleWindow.print(title.c_str());
 
     Window seriesWindow(rows-3, cols, 3, 0);
     generateSeriesWindow(seriesWindow);
@@ -43,8 +43,8 @@ void generateSeriesWindow(Window &seriesWindow)
 
     series[0].setHaveWatched(2, true);
     
-    SeriesView printer(series);
-    seriesWindow.print(printer.toString());
+    SeriesView printer(seriesWindow, series);
+    printer.refresh();
 }
 
 

@@ -3,10 +3,12 @@
 
 #include <vector>
 #include "series.h"
+#include "window.h"
 #include <string>
 
 class SeriesView
 {
+    Window& window;
     const std::vector<Series> series;
     int maxNameLength;
     int activeItem;
@@ -14,8 +16,8 @@ class SeriesView
     std::string createWatchedBoxesString(Series s);
 
     public:
-        SeriesView(std::vector<Series> series);
-        const std::string toString();
+        SeriesView(Window& win, std::vector<Series> series);
+        void refresh();
 };
 
 #endif
