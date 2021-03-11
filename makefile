@@ -3,7 +3,7 @@
 # A few variables
 
 CC=g++
-LIBS=-lncurses
+ARGS="-lncurses -Wc++11-extensions"
 
 EXE_DIR=.
 EXE=series_tracker
@@ -15,7 +15,7 @@ SRC_FILES := $(shell find . -name "*.cpp")
 
 ${EXE_PATH}: ${SRC_FILES}
 	@mkdir -p ${EXE_DIR}
-	${CC} -g $^ -o $@ ${LIBS}
+	${CC} -g $^ -o $@ ${ARGS}
 
 all: ${EXE_PATH}
 
