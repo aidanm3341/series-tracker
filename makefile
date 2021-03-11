@@ -10,11 +10,12 @@ EXE=series_tracker
 
 EXE_PATH=${EXE_DIR}/${EXE}
 
-SRC_FILES := ${wildcard *.cpp}
+#SRC_FILES := ${wildcard *.cpp}
+SRC_FILES := $(shell find . -name "*.cpp")
 
 ${EXE_PATH}: ${SRC_FILES}
 	@mkdir -p ${EXE_DIR}
-	${CC} $^ -o $@ ${LIBS}
+	${CC} -g $^ -o $@ ${LIBS}
 
 all: ${EXE_PATH}
 
