@@ -8,15 +8,16 @@ class Window
 {
     WINDOW* borderWindow;
     WINDOW* contentWindow;
-    bool highlight;
 
     public:
+        enum ATTR {REVERSE=A_REVERSE, BOLD=A_BOLD};
+
         Window(int height, int width, int y, int x);
         ~Window();
 
         void show();
         void print(const char * str);
-        void toggleHighlight();
+        void printWithAttr(const char * str, ATTR attr);
 };
 
 Window& operator<<(Window& win, const char * str);

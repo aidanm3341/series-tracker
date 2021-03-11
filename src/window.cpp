@@ -2,7 +2,7 @@
 #include <ncurses.h>
 #include <iostream>
 
-Window::Window(int height, int width, int y, int x) : highlight(false)
+Window::Window(int height, int width, int y, int x)
 {    
     borderWindow = newwin(height, width, y, x);
 	box(borderWindow, 0 , 0);
@@ -21,13 +21,11 @@ void Window::print(const char * str)
     wprintw(contentWindow, str);
 }
 
-void Window::toggleHighlight()
+void Window::printWithAttr(const char * str, ATTR attr)
 {
-    highlight = !highlight;
-    if(highlight)
-        wattron(contentWindow, A_REVERSE);
-    else
-        wattroff(contentWindow, A_REVERSE);
+    wattron(contentWindow, attr);
+    print(str);
+    wattroff(contentWindow, attr);
 }
 
 Window::~Window()
