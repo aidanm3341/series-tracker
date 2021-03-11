@@ -15,12 +15,13 @@ int main()
     CursesApp app;
 
     SeriesModel model;
-    SeriesView printer(model.getSeries());
+    SeriesView view(model.getSeries());
+    SeriesController controller(view);
 
     refresh();
-    printer.refresh();
+    view.refresh();
 
-    getch();
+    controller.startLoop();
 
     return 0;
 }

@@ -18,6 +18,7 @@ class Window
         void show();
         void print(const char * str);
         void printWithAttr(const char * str, ATTR attr);
+        void clear();
 };
 
 Window& operator<<(Window& win, const char * str);

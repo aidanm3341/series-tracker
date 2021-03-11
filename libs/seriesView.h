@@ -21,6 +21,9 @@ class SeriesView
     public:
         SeriesView(std::vector<Series> series);
         void refresh();
+        void scrollUp();
+        void scrollDown();
+        void clear();
 };
 
 #endif

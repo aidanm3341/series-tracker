@@ -46,3 +46,26 @@ void SeriesView::refresh()
     titleWindow.show();
     seriesWindow.show();
 }
+
+void SeriesView::scrollUp()
+{
+    activeItem--;
+    if(activeItem < 0)
+        activeItem = series.size()-1;
+    clear();
+    refresh();
+}
+
+void SeriesView::scrollDown()
+{
+    activeItem++;
+    if(activeItem >= series.size())
+        activeItem = 0;
+    clear();
+    refresh();
+}
+
+void SeriesView::clear()
+{
+    seriesWindow.clear();
+}

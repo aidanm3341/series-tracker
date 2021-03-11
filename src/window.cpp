@@ -42,3 +42,8 @@ Window& operator<<(Window& win, const char * str)
     return win;
 }
 
+void Window::clear()
+{
+    werase(contentWindow);
+}
+
