@@ -11,6 +11,7 @@ class SeriesModel
         SeriesModel();
         std::vector<Series>& getSeries();
         void incrementSeries(int seriesNumber);
+        void decrementSeries(int seriesNumber);
 };
 
 #endif

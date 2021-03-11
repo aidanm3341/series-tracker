@@ -22,6 +22,10 @@ void SeriesController::startLoop()
                 model.incrementSeries(view.getActiveItemNumber());
                 view.refresh();
                 break;
+            case KEY_LEFT:
+                model.decrementSeries(view.getActiveItemNumber());
+                view.refresh();
+                break;
 		}
 
         //view.refresh();

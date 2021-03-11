@@ -22,9 +22,16 @@ const bool Series::haveWatchedSeries(int seriesNo)
     return haveWatched[seriesNo];
 }
 
-void Series::watchNext()
+void Series::increment()
 {
     haveWatched[currentSeries] = true;
     if(currentSeries < noOfSeries)
         currentSeries++;
+}
+
+void Series::decrement()
+{
+    if(currentSeries > 0)
+        currentSeries--;
+    haveWatched[currentSeries] = false;
 }
