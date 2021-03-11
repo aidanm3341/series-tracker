@@ -1,5 +1,6 @@
 *.out
 out/
+*.dSYM/
 
 ncurses_programs/
 

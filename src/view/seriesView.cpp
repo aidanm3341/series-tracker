@@ -1,6 +1,7 @@
-#include "seriesView.h"
-#include "sstream"
-#include "window.h"
+#include <seriesView.h>
+#include <window.h>
+
+#include <sstream>
 
 SeriesView::SeriesView(Window& win, std::vector<Series> srs) : window(win), series(srs), maxNameLength(0), activeItem(0)
 {
@@ -31,10 +32,10 @@ void SeriesView::refresh()
     {
         Series s = series[i];
         if(i==activeItem)
-            attron(A_REVERSE);
+            window.toggleHighlight();
         window << s.getName().c_str();
         if(i==activeItem)
-            attroff(A_REVERSE);
+            window.toggleHighlight();
 
         window << std::string(maxNameLength - s.getName().length(), ' ') .c_str()
                << createWatchedBoxesString(s).c_str()

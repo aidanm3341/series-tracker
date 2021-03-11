@@ -1,12 +1,14 @@
 #include <ncurses.h>
-#include "window.h"
-#include "series.h"
-#include "seriesView.h"
-#include "cursesapp.h"
+
+#include <window.h>
+#include <series.h>
+#include <seriesView.h>
+#include <cursesapp.h>
+
 #include <string>
 #include <vector>
 
-std::string title = "Series Tracker"; 
+std::string title = "Series Tracker2"; 
 
 int cols, rows;
 

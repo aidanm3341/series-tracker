@@ -2,8 +2,8 @@
 #define SERIESPRINTER_H
 
 #include <vector>
-#include "series.h"
-#include "window.h"
+#include <series.h>
+#include <window.h>
 #include <string>
 
 class SeriesView

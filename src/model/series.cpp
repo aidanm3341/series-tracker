@@ -1,4 +1,4 @@
-#include "series.h"
+#include <series.h>
 
 Series::Series(std::string n, int numSeries) : name(n), noOfSeries(numSeries), haveWatched(std::vector<bool>(numSeries, false)) {}
 

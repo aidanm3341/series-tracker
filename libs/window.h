@@ -8,6 +8,7 @@ class Window
 {
     WINDOW* borderWindow;
     WINDOW* contentWindow;
+    bool highlight;
 
     public:
         Window(int height, int width, int y, int x);
@@ -15,6 +16,7 @@ class Window
 
         void show();
         void print(const char * str);
+        void toggleHighlight();
 };
 
 Window& operator<<(Window& win, const char * str);
