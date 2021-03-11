@@ -2,13 +2,15 @@
 #define SERIESCONTROLLER_H
 
 #include <seriesView.h>
+#include <seriesModel.h>
 
 class SeriesController
 {
     SeriesView& view;
-    
+    SeriesModel& model;
+
     public:
-        SeriesController(SeriesView& view);
+        SeriesController(SeriesView& view, SeriesModel& model);
 
         void startLoop();
 };

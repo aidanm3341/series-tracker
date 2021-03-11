@@ -9,6 +9,7 @@ class Series
     const std::string name;
     const int noOfSeries;
     std::vector<bool> haveWatched;
+    int currentSeries;
 
     public:
         Series(std::string name, int noOfSeries);
@@ -17,7 +18,7 @@ class Series
         const std::string getName();
         const int getNoOfSeries();
         const bool haveWatchedSeries(int seriesNo);
-        void setHaveWatched(int seriesNo, bool val);
+        void watchNext();
 };
 
 #endif

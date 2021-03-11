@@ -9,7 +9,8 @@ class SeriesModel
     std::vector<Series> series;
     public:
         SeriesModel();
-        std::vector<Series> getSeries();
+        std::vector<Series>& getSeries();
+        void incrementSeries(int seriesNumber);
 };
 
 #endif

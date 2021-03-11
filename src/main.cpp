@@ -15,8 +15,8 @@ int main()
     CursesApp app;
 
     SeriesModel model;
-    SeriesView view(model.getSeries());
-    SeriesController controller(view);
+    SeriesView view(model);
+    SeriesController controller(view, model);
 
     refresh();
     view.refresh();

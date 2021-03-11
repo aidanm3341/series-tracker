@@ -3,13 +3,13 @@
 
 #include <sstream>
 
-SeriesView::SeriesView(std::vector<Series> srs) : cols(getmaxx(stdscr)), rows(getmaxy(stdscr)), 
-                                                    series(srs), maxNameLength(0), activeItem(0), 
+SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(stdscr)), 
+                                                    model(m), maxNameLength(0), activeItem(0), 
                                                     titleWindow(3, cols, 0, 0), seriesWindow(rows-3, cols, 3, 0)
 {
     titleWindow.print(title.c_str());
 
-    for (Series s : series)
+    for (Series s : model.getSeries())
         if(s.getName().length() > maxNameLength)
             maxNameLength = s.getName().length();
 }
@@ -30,9 +30,10 @@ std::string SeriesView::createWatchedBoxesString(Series s)
 
 void SeriesView::refresh()
 {
-    for (int i = 0; i < series.size(); i++)
+    clear();
+    for (int i = 0; i < model.getSeries().size(); i++)
     {
-        Series s = series[i];
+        Series s = model.getSeries()[i];
         if(activeItem==i)
             seriesWindow.printWithAttr(s.getName().c_str(), Window::ATTR::REVERSE);
         else
@@ -51,21 +52,24 @@ void SeriesView::scrollUp()
 {
     activeItem--;
     if(activeItem < 0)
-        activeItem = series.size()-1;
-    clear();
+        activeItem = model.getSeries().size()-1;
     refresh();
 }
 
 void SeriesView::scrollDown()
 {
     activeItem++;
-    if(activeItem >= series.size())
+    if(activeItem >= model.getSeries().size())
         activeItem = 0;
-    clear();
     refresh();
 }
 
 void SeriesView::clear()
 {
     seriesWindow.clear();
+}
+
+int SeriesView::getActiveItemNumber()
+{
+    return activeItem;
 }

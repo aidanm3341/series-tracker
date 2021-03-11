@@ -1,6 +1,6 @@
 #include <seriesController.h>
 
-SeriesController::SeriesController(SeriesView& v) : view(v) 
+SeriesController::SeriesController(SeriesView& v, SeriesModel& m) : view(v) , model(m)
 {}
 
 void SeriesController::startLoop()
@@ -18,6 +18,10 @@ void SeriesController::startLoop()
 			case KEY_DOWN:
 				view.scrollDown();
 				break;	
+            case KEY_RIGHT:
+                model.incrementSeries(view.getActiveItemNumber());
+                view.refresh();
+                break;
 		}
 
         //view.refresh();
