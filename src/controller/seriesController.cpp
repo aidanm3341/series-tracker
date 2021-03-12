@@ -19,15 +19,13 @@ void SeriesController::startLoop()
 				view.scrollDown();
 				break;	
             case KEY_RIGHT:
-                model.incrementSeries(view.getActiveItemNumber());
+                model.incrementSeries();
                 view.refresh();
                 break;
             case KEY_LEFT:
-                model.decrementSeries(view.getActiveItemNumber());
+                model.decrementSeries();
                 view.refresh();
                 break;
 		}
-
-        //view.refresh();
     }
 }

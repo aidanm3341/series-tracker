@@ -1,6 +1,6 @@
 #include <seriesModel.h>
 
-SeriesModel::SeriesModel()
+SeriesModel::SeriesModel() : activeItem(0)
 {
     series.push_back(Series("Family Guy", 7));
     series.push_back(Series("Phineas and Ferb", 4));
@@ -13,12 +13,22 @@ std::vector<Series>& SeriesModel::getSeries()
     return series;
 }
 
-void SeriesModel::incrementSeries(int seriesNumber)
+void SeriesModel::incrementSeries()
 {
-    series[seriesNumber].increment();
+    series[activeItem].increment();
 }
 
-void SeriesModel::decrementSeries(int seriesNumber)
+void SeriesModel::decrementSeries()
 {
-    series[seriesNumber].decrement();
+    series[activeItem].decrement();
+}
+
+int SeriesModel::getActiveItem()
+{
+    return activeItem;
+}
+
+void SeriesModel::setActiveItem(int newActiveItem)
+{
+    activeItem = newActiveItem;
 }

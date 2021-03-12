@@ -7,11 +7,15 @@
 class SeriesModel
 {
     std::vector<Series> series;
+    int activeItem;
+
     public:
         SeriesModel();
         std::vector<Series>& getSeries();
-        void incrementSeries(int seriesNumber);
-        void decrementSeries(int seriesNumber);
+        void incrementSeries();
+        void decrementSeries();
+        int getActiveItem();
+        void setActiveItem(int newActiveItem);
 };
 
 #endif

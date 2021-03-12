@@ -4,7 +4,7 @@
 #include <sstream>
 
 SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(stdscr)), 
-                                                    model(m), maxNameLength(0), activeItem(0), 
+                                                    model(m), maxNameLength(0), 
                                                     titleWindow(3, cols, 0, 0), seriesWindow(rows-3, cols, 3, 0)
 {
     titleWindow.print(title.c_str());
@@ -34,7 +34,7 @@ void SeriesView::refresh()
     for (int i = 0; i < model.getSeries().size(); i++)
     {
         Series s = model.getSeries()[i];
-        if(activeItem==i)
+        if(i == model.getActiveItem())
             seriesWindow.printWithAttr(s.getName().c_str(), Window::ATTR::REVERSE);
         else
             seriesWindow << s.getName().c_str();
@@ -50,26 +50,17 @@ void SeriesView::refresh()
 
 void SeriesView::scrollUp()
 {
-    activeItem--;
-    if(activeItem < 0)
-        activeItem = model.getSeries().size()-1;
+    model.setActiveItem((model.getActiveItem()-1) % model.getSeries().size());
     refresh();
 }
 
 void SeriesView::scrollDown()
 {
-    activeItem++;
-    if(activeItem >= model.getSeries().size())
-        activeItem = 0;
+    model.setActiveItem((model.getActiveItem()+1) % model.getSeries().size());
     refresh();
 }
 
 void SeriesView::clear()
 {
     seriesWindow.clear();
-}
-
-int SeriesView::getActiveItemNumber()
-{
-    return activeItem;
 }

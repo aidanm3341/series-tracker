@@ -15,7 +15,6 @@ class SeriesView
     Window seriesWindow, titleWindow;
     SeriesModel& model;
     int maxNameLength;
-    int activeItem;
 
     std::string createWatchedBoxesString(Series s);
 
@@ -25,7 +24,6 @@ class SeriesView
         void scrollUp();
         void scrollDown();
         void clear();
-        int getActiveItemNumber();
 };
 
 #endif

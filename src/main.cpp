@@ -21,6 +21,9 @@ int main()
     refresh();
     view.refresh();
 
+    Window inputBox(6, 16, 5, 8);
+    inputBox.show();
+
     controller.startLoop();
 
     return 0;
