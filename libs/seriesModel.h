@@ -8,6 +8,7 @@ class SeriesModel
 {
     std::vector<Series> series;
     int activeItem;
+    int maxNumberOfSeries;
 
     public:
         SeriesModel();
@@ -17,6 +18,8 @@ class SeriesModel
         int getActiveItem();
         void setActiveItem(int newActiveItem);
         void addNewSeries(std::string name, int numOfSeries);
+
+        int getMaxNumberOfSeries();
 };
 
 #endif
