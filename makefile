@@ -3,6 +3,7 @@
 # A few variables
 
 CC=g++
+CPPSTD=c++20
 ARGS=-lncurses
 
 EXE_DIR=out
@@ -17,7 +18,7 @@ SRC_FILES := $(shell find . -name "*.cpp")
 
 ${EXE_PATH}: ${SRC_FILES}
 	@mkdir -p ${EXE_DIR}
-	${CC} -g  -I${INCLUDE_PATH} $^ -o $@ ${ARGS}
+	${CC} -g  -I${INCLUDE_PATH} $^ -o $@ ${ARGS} -std=${CPPSTD}
 
 all: ${EXE_PATH}
 
