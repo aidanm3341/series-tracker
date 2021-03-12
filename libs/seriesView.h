@@ -11,8 +11,8 @@ const static std::string TITLE = "Series Tracker";
 
 const static std::string UNWATCHED_SERIES = "[ ]";
 const static std::string WATCHED_SERIES   = "[X]";
-const static int CHECKBOX_SPACING = 2;
-const static int SPACE_BETWEEN_NAME_AND_CHECKBOXES = 3;
+const static int CHECKBOX_SPACING = 1;
+const static int SPACE_BETWEEN_NAME_AND_CHECKBOXES = 1;
 
 class SeriesView
 {

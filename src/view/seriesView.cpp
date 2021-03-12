@@ -44,8 +44,11 @@ std::string SeriesView::createSeriesNumberBarString()
 
     for (size_t i = 0; i < model.getMaxNumberOfSeries(); i++)
     {
-        output << std::string(WATCHED_SERIES.length()/2, ' ')
-               << i+1 
+        if(i < 9)
+            output << std::string(WATCHED_SERIES.length()/2, ' ');
+        else
+            output << std::string(WATCHED_SERIES.length()/2 - 1, ' ');
+        output << i+1
                << std::string(WATCHED_SERIES.length()/2, ' ')
                << std::string(CHECKBOX_SPACING, ' ');
     }
