@@ -5,7 +5,9 @@
 
 SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(stdscr)), 
                                                     model(m), maxNameLength(0), 
-                                                    titleWindow(3, cols, 0, 0), seriesWindow(rows-3, cols, 3, 0)
+                                                    titleWindow (3     , cols, 0, 0), 
+                                                    seriesWindow(rows-6, cols, 3, 0), 
+                                                    inputWindow (3     , cols, rows-3, 0)
 {
     titleWindow.print(title.c_str());
 
@@ -46,9 +48,18 @@ void SeriesView::refresh()
 
     titleWindow.show();
     seriesWindow.show();
+    inputWindow.show();
 }
 
 void SeriesView::clear()
 {
     seriesWindow.clear();
+}
+
+std::string SeriesView::promptUser(std::string prompt)
+{
+    inputWindow << prompt.c_str();
+    std::string output = inputWindow.input(0, prompt.length());
+    inputWindow.clear();
+    return output;
 }

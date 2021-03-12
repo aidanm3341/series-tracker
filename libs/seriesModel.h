@@ -16,6 +16,7 @@ class SeriesModel
         void decrementSeries();
         int getActiveItem();
         void setActiveItem(int newActiveItem);
+        void addNewSeries(std::string name, int numOfSeries);
 };
 
 #endif

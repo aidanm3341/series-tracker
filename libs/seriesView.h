@@ -12,7 +12,7 @@ const static std::string title = "Series Tracker";
 class SeriesView
 {
     int cols, rows;
-    Window seriesWindow, titleWindow;
+    Window seriesWindow, titleWindow, inputWindow;
     SeriesModel& model;
     int maxNameLength;
 
@@ -22,6 +22,7 @@ class SeriesView
         SeriesView(SeriesModel& model);
         void refresh();
         void clear();
+        std::string promptUser(std::string prompt);
 };
 
 #endif
