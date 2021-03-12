@@ -11,6 +11,11 @@ SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(std
 {
     titleWindow.print(TITLE.c_str());
 
+    updateMaxNameLength();
+}
+
+void SeriesView::updateMaxNameLength()
+{
     for (Series s : model.getSeries())
         if(s.getName().length() > maxNameLength)
             maxNameLength = s.getName().length();
@@ -48,12 +53,8 @@ std::string SeriesView::createSeriesNumberBarString()
     return output.str();
 }
 
-void SeriesView::refresh()
+void SeriesView::printAllSeries()
 {
-    clear();
-
-    seriesWindow << createSeriesNumberBarString().c_str();
-
     for (int i = 0; i < model.getSeries().size(); i++)
     {
         Series s = model.getSeries()[i];
@@ -66,6 +67,16 @@ void SeriesView::refresh()
                << createWatchedBoxesString(s).c_str()
                << "\n";
     }
+}
+
+void SeriesView::refresh()
+{
+    clear();
+    updateMaxNameLength();
+
+    seriesWindow << createSeriesNumberBarString().c_str();
+
+    printAllSeries();
 
     titleWindow.show();
     seriesWindow.show();

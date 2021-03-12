@@ -3,7 +3,7 @@
 # A few variables
 
 CC=g++
-CPPSTD=c++20
+CPPSTD=c++17
 ARGS=-lncurses
 
 EXE_DIR=out

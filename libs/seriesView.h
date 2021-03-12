@@ -21,8 +21,10 @@ class SeriesView
     SeriesModel& model;
     int maxNameLength;
 
+    void updateMaxNameLength();
     std::string createWatchedBoxesString(Series s);
     std::string createSeriesNumberBarString();
+    void printAllSeries();
 
     public:
         SeriesView(SeriesModel& model);
