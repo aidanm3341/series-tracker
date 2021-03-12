@@ -9,8 +9,13 @@ SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(std
                                                     seriesWindow(rows-6, cols, 3, 0), 
                                                     inputWindow (3     , cols, rows-3, 0)
 {
-    titleWindow.print(title.c_str());
+    titleWindow.print(TITLE.c_str());
 
+    updateMaxNameLength();
+}
+
+void SeriesView::updateMaxNameLength()
+{
     for (Series s : model.getSeries())
         if(s.getName().length() > maxNameLength)
             maxNameLength = s.getName().length();
@@ -19,20 +24,37 @@ SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(std
 std::string SeriesView::createWatchedBoxesString(Series s)
 {
     std::stringstream output;
-    output << "   ";
+    output << std::string(SPACE_BETWEEN_NAME_AND_CHECKBOXES, ' ');
     for (size_t i = 0; i < s.getNoOfSeries(); i++)
     {
         if(s.haveWatchedSeries(i))
-            output << "[X]  ";
+            output << WATCHED_SERIES << std::string(CHECKBOX_SPACING, ' ');
         else
-            output << "[ ]  ";
+            output << UNWATCHED_SERIES << std::string(CHECKBOX_SPACING, ' ');
     }
     return output.str();
 }
 
-void SeriesView::refresh()
+std::string SeriesView::createSeriesNumberBarString()
 {
-    clear();
+    std::stringstream output;
+    output << std::string(maxNameLength, ' ') 
+           << std::string(SPACE_BETWEEN_NAME_AND_CHECKBOXES, ' ');
+           
+
+    for (size_t i = 0; i < model.getMaxNumberOfSeries(); i++)
+    {
+        output << std::string(WATCHED_SERIES.length()/2, ' ')
+               << i+1 
+               << std::string(WATCHED_SERIES.length()/2, ' ')
+               << std::string(CHECKBOX_SPACING, ' ');
+    }
+    output << "\n";
+    return output.str();
+}
+
+void SeriesView::printAllSeries()
+{
     for (int i = 0; i < model.getSeries().size(); i++)
     {
         Series s = model.getSeries()[i];
@@ -45,6 +67,16 @@ void SeriesView::refresh()
                << createWatchedBoxesString(s).c_str()
                << "\n";
     }
+}
+
+void SeriesView::refresh()
+{
+    clear();
+    updateMaxNameLength();
+
+    seriesWindow << createSeriesNumberBarString().c_str();
+
+    printAllSeries();
 
     titleWindow.show();
     seriesWindow.show();

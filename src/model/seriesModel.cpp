@@ -1,11 +1,11 @@
 #include <seriesModel.h>
 
-SeriesModel::SeriesModel() : activeItem(0)
+SeriesModel::SeriesModel() : activeItem(0), maxNumberOfSeries(0)
 {
-    series.push_back(Series("Family Guy", 7));
-    series.push_back(Series("Phineas and Ferb", 4));
-    series.push_back(Series("Game Of Thrones", 8));
-    series.push_back(Series("WandaVision", 1));
+    addNewSeries("Family Guy", 7);
+    addNewSeries("Phineas and Ferb", 4);
+    addNewSeries("Game Of Thrones", 8);
+    addNewSeries("WandaVision", 1);
 }
 
 std::vector<Series>& SeriesModel::getSeries()
@@ -36,4 +36,11 @@ void SeriesModel::setActiveItem(int newActiveItem)
 void SeriesModel::addNewSeries(std::string name, int numOfSeries)
 {
     series.push_back(Series(name, numOfSeries));
+    if(numOfSeries > maxNumberOfSeries)
+        maxNumberOfSeries = numOfSeries;
+}
+
+int SeriesModel::getMaxNumberOfSeries()
+{
+    return maxNumberOfSeries;
 }

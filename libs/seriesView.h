@@ -7,7 +7,12 @@
 #include <seriesModel.h>
 #include <string>
 
-const static std::string title = "Series Tracker"; 
+const static std::string TITLE = "Series Tracker"; 
+
+const static std::string UNWATCHED_SERIES = "[ ]";
+const static std::string WATCHED_SERIES   = "[X]";
+const static int CHECKBOX_SPACING = 2;
+const static int SPACE_BETWEEN_NAME_AND_CHECKBOXES = 3;
 
 class SeriesView
 {
@@ -16,7 +21,10 @@ class SeriesView
     SeriesModel& model;
     int maxNameLength;
 
+    void updateMaxNameLength();
     std::string createWatchedBoxesString(Series s);
+    std::string createSeriesNumberBarString();
+    void printAllSeries();
 
     public:
         SeriesView(SeriesModel& model);
