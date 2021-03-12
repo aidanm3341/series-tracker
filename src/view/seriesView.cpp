@@ -39,25 +39,13 @@ void SeriesView::refresh()
         else
             seriesWindow << s.getName().c_str();
 
-        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ') .c_str()
+        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ').c_str()
                << createWatchedBoxesString(s).c_str()
                << "\n";
     }
 
     titleWindow.show();
     seriesWindow.show();
-}
-
-void SeriesView::scrollUp()
-{
-    model.setActiveItem((model.getActiveItem()-1) % model.getSeries().size());
-    refresh();
-}
-
-void SeriesView::scrollDown()
-{
-    model.setActiveItem((model.getActiveItem()+1) % model.getSeries().size());
-    refresh();
 }
 
 void SeriesView::clear()

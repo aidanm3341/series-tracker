@@ -21,8 +21,6 @@ class SeriesView
     public:
         SeriesView(SeriesModel& model);
         void refresh();
-        void scrollUp();
-        void scrollDown();
         void clear();
 };
 

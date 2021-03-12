@@ -13,10 +13,12 @@ void SeriesController::startLoop()
         switch(ch)
 		{	
 			case KEY_UP:
-				view.scrollUp();
+				model.setActiveItem((model.getActiveItem()-1) % model.getSeries().size());
+                view.refresh();
 				break;
 			case KEY_DOWN:
-				view.scrollDown();
+				model.setActiveItem((model.getActiveItem()+1) % model.getSeries().size());
+                view.refresh();
 				break;	
             case KEY_RIGHT:
                 model.incrementSeries();
