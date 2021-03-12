@@ -32,3 +32,8 @@ void SeriesModel::setActiveItem(int newActiveItem)
 {
     activeItem = newActiveItem;
 }
+
+void SeriesModel::addNewSeries(std::string name, int numOfSeries)
+{
+    series.push_back(Series(name, numOfSeries));
+}

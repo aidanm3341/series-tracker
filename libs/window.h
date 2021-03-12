@@ -19,6 +19,8 @@ class Window
         void print(const char * str);
         void printWithAttr(const char * str, ATTR attr);
         void clear();
+        void move(int y, int x);
+        std::string input(int y, int x);
 };
 
 Window& operator<<(Window& win, const char * str);

@@ -47,3 +47,20 @@ void Window::clear()
     werase(contentWindow);
 }
 
+void Window::move(int y, int x)
+{
+    wmove(contentWindow, y, x);
+}
+
+std::string Window::input(int y, int x)
+{
+    curs_set(1);
+    echo();
+
+    char input[100] = {};
+    mvwgetstr(contentWindow, y, x, input);
+
+    curs_set(0);
+    noecho();
+    return std::string(input);
+}
