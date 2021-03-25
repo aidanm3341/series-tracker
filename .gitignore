@@ -5,3 +5,4 @@ out/
 ncurses_programs/
 
 .vscode/
+.DS_STORE
