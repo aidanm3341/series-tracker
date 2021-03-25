@@ -1,6 +1,17 @@
 #include <series.h>
 
-Series::Series(std::string n, int numSeries) : name(n), noOfSeries(numSeries), haveWatched(std::vector<bool>(numSeries, false)), currentSeries(0) {}
+Series::Series(std::string n, int numSeries, int currentSeries) : name(n), noOfSeries(numSeries), 
+                                                                haveWatched(std::vector<bool>(numSeries, false)),
+                                                                 currentSeries(currentSeries) 
+{
+    for (size_t i = 0; i < currentSeries; i++)
+    {
+        haveWatched[i] = true;
+    }
+}
+
+Series::Series(std::string n, int numSeries) : Series(n, numSeries, 0)
+{}
 
 Series::Series(const Series& s) : name(s.name), noOfSeries(s.noOfSeries), haveWatched(s.haveWatched), currentSeries(s.currentSeries)
 {}

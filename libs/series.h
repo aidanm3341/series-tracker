@@ -12,6 +12,7 @@ class Series
     int currentSeries;
 
     public:
+        Series(std::string n, int numSeries, int currentSeries);
         Series(std::string name, int noOfSeries);
         Series(const Series& series);
         Series(Series&& series);

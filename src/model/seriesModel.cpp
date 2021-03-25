@@ -16,11 +16,13 @@ std::vector<Series>& SeriesModel::getSeries()
 void SeriesModel::incrementSeries()
 {
     series[activeItem].increment();
+    dal->setCurrentSeries(series[activeItem]);
 }
 
 void SeriesModel::decrementSeries()
 {
     series[activeItem].decrement();
+    dal->setCurrentSeries(series[activeItem]);
 }
 
 int SeriesModel::getActiveItem()
