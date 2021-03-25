@@ -9,16 +9,19 @@
 
 #include <seriesDAL.h>
 #include <SQLiteSeriesDAL.h>
+#include <logger.h>
 
 #include <string>
 #include <vector>
 
 int main()
 {
-    //SeriesDAL *dal;
+    Logger logger;
+
+    SeriesDAL *dal;
     SQLiteSeriesDAL sqldal = SQLiteSeriesDAL();
-    //dal = &sqldal;
-    sqldal.loadSeries();
+    dal = &sqldal;
+    dal->loadSeries();
 
     CursesApp app;
 
