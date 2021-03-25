@@ -5,6 +5,7 @@ SQLiteSeriesDAL::SQLiteSeriesDAL() : db(sqlite::database("series.db"))
     db <<
          "CREATE TABLE IF NOT EXISTS Series ("
          "   _id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+         "   name VARCHAR(255)"
          "   maxSeries INT,"
          "   currentSeries INT"
          ");";
