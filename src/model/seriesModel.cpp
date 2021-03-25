@@ -41,6 +41,12 @@ void SeriesModel::addNewSeries(std::string name, int numOfSeries)
     dal->saveSeries(s);    
 }
 
+void SeriesModel::deleteActiveSeries()
+{
+    dal->deleteSeries(series[activeItem]);
+    series.erase(series.begin() + activeItem);
+}
+
 int SeriesModel::getMaxNumberOfSeries()
 {
     int maxNumberOfSeries = 0;

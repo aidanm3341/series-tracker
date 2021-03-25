@@ -9,6 +9,7 @@ class SeriesDAL
     public:
         virtual std::vector<Series> loadSeries() = 0;
         virtual void saveSeries(Series series) = 0;
+        virtual void deleteSeries(Series series) = 0;
 };
 
 #endif

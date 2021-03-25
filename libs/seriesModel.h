@@ -23,6 +23,7 @@ class SeriesModel
         int getActiveItem();
         void setActiveItem(int newActiveItem);
         void addNewSeries(std::string name, int numOfSeries);
+        void deleteActiveSeries();
 
         int getMaxNumberOfSeries();
 };

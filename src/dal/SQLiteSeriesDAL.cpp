@@ -32,12 +32,25 @@ std::vector<Series> SQLiteSeriesDAL::loadSeries()
 
 void SQLiteSeriesDAL::saveSeries(Series s)
 {
-try
+    try
     {
         db << "INSERT INTO Series(name, maxSeries, currentSeries) VALUES (?, ?, ?);"
         << s.getName()
         << s.getNoOfSeries()
         << s.getCurrentSeries();
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+}
+
+void SQLiteSeriesDAL::deleteSeries(Series s)
+{
+    try
+    {
+        db << "DELETE FROM Series WHERE name = ?;"
+        << s.getName();
     }
     catch(const std::exception& e)
     {

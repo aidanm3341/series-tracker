@@ -2,6 +2,30 @@
 
 Series::Series(std::string n, int numSeries) : name(n), noOfSeries(numSeries), haveWatched(std::vector<bool>(numSeries, false)), currentSeries(0) {}
 
+Series::Series(const Series& s) : name(s.name), noOfSeries(s.noOfSeries), haveWatched(s.haveWatched), currentSeries(s.currentSeries)
+{}
+
+Series::Series(Series&& s) : name(s.name), noOfSeries(s.noOfSeries), haveWatched(s.haveWatched), currentSeries(s.currentSeries)
+{}
+
+Series& Series::operator=(const Series& s) noexcept
+{
+    name = s.name;
+    noOfSeries = s.noOfSeries;
+    haveWatched = s.haveWatched;
+    currentSeries = s.currentSeries;
+    return *this;
+}
+
+Series& Series::operator=(Series&& s) noexcept
+{
+    name = s.name;
+    noOfSeries = s.noOfSeries;
+    haveWatched = s.haveWatched;
+    currentSeries = s.currentSeries;
+    return *this;
+}
+
 Series::~Series()
 {
 

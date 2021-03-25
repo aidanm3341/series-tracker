@@ -6,13 +6,17 @@
 
 class Series
 {
-    const std::string name;
-    const int noOfSeries;
+    std::string name;
+    int noOfSeries;
     std::vector<bool> haveWatched;
     int currentSeries;
 
     public:
         Series(std::string name, int noOfSeries);
+        Series(const Series& series);
+        Series(Series&& series);
+        Series& operator=(const Series& series) noexcept;
+        Series& operator=(Series&& series) noexcept;
         ~Series();
 
         const std::string getName();

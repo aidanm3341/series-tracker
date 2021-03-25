@@ -31,10 +31,24 @@ void SeriesController::startLoop()
                 view.refresh();
                 break;
 
-            case 'a':
-                std::string name = view.promptUser("Name - ");
+            case 'a': {
+                std::string name;
+                bool isValidInput = true;
+                name = view.promptUser("Name - ");
+                for(Series s : model.getSeries())
+                    if(name == s.getName())
+                        isValidInput = false;
+                
+                while(!isValidInput)
+                {
+                    name = view.promptUser("Series with that name exists already, try again - ");
+                    for(Series s : model.getSeries())
+                    if(name == s.getName())
+                        isValidInput = false;
+                }
+                
                 int noOfSeries = 0;
-                bool isValidInput = false;
+                isValidInput = false;
                 try
                 {
                     noOfSeries = std::stoi(view.promptUser("Number of series - "));
@@ -56,6 +70,24 @@ void SeriesController::startLoop()
                 model.addNewSeries(name, noOfSeries);
                 view.refresh();
                 break;
+            }
+
+            case 'd': {
+                std::string response;
+                bool isValidInput = false;
+                while(!isValidInput)
+                {
+                    response = view.promptUser("Are you sure you want to delete? (y/n) - ");
+                    if(response == "y" || response == "n")
+                        isValidInput = true;
+                }
+                if(response == "y")
+                {
+                    model.deleteActiveSeries();
+                }
+                view.refresh();
+                break;
+            }
 		}
     }
 }
