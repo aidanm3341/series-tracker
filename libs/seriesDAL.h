@@ -1,0 +1,14 @@
+#ifndef SERIESDAL_H
+#define SERIESDAL_H
+
+#include <series.h>
+#include <vector>
+
+class SeriesDAL
+{
+    public:
+        virtual std::vector<Series> loadSeries() = 0;
+        virtual void saveSeries(std::vector<Series> series) = 0;
+};
+
+#endif
