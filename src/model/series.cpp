@@ -17,6 +17,11 @@ const int Series::getNoOfSeries()
     return noOfSeries;
 }
 
+const int Series::getCurrentSeries()
+{
+    return currentSeries;
+}
+
 const bool Series::haveWatchedSeries(int seriesNo)
 {
     return haveWatched[seriesNo];

@@ -21,6 +21,7 @@ int main()
     SeriesDAL *dal;
     SQLiteSeriesDAL sqldal = SQLiteSeriesDAL();
     dal = &sqldal;
+
     dal->loadSeries();
 
     CursesApp app;

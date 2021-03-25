@@ -17,6 +17,7 @@ class Series
 
         const std::string getName();
         const int getNoOfSeries();
+        const int getCurrentSeries();
         const bool haveWatchedSeries(int seriesNo);
         void increment();
         void decrement();

@@ -1,11 +1,11 @@
 #include <seriesModel.h>
+#include <SQLiteSeriesDAL.h>
 
-SeriesModel::SeriesModel() : activeItem(0), maxNumberOfSeries(0)
+SeriesModel::SeriesModel() : activeItem(0)
 {
-    addNewSeries("Family Guy", 7);
-    addNewSeries("Phineas and Ferb", 4);
-    addNewSeries("Game Of Thrones", 8);
-    addNewSeries("WandaVision", 1);
+    dal = &sqldal;
+
+    series = dal->loadSeries();
 }
 
 std::vector<Series>& SeriesModel::getSeries()
@@ -35,12 +35,18 @@ void SeriesModel::setActiveItem(int newActiveItem)
 
 void SeriesModel::addNewSeries(std::string name, int numOfSeries)
 {
-    series.push_back(Series(name, numOfSeries));
-    if(numOfSeries > maxNumberOfSeries)
-        maxNumberOfSeries = numOfSeries;
+    Series s(name, numOfSeries);
+    series.push_back(s);
+
+    dal->saveSeries(s);    
 }
 
 int SeriesModel::getMaxNumberOfSeries()
 {
+    int maxNumberOfSeries = 0;
+    for(Series s : series)
+        if(s.getNoOfSeries() > maxNumberOfSeries)
+            maxNumberOfSeries = s.getNoOfSeries();
+    
     return maxNumberOfSeries;
 }

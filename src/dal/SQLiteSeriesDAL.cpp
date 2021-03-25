@@ -2,34 +2,46 @@
 
 SQLiteSeriesDAL::SQLiteSeriesDAL() : db(sqlite::database("series.db"))
 {
-    db <<
-         "CREATE TABLE IF NOT EXISTS Series ("
-         "   _id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-         "   name VARCHAR(255)"
-         "   maxSeries INT,"
-         "   currentSeries INT"
-         ");";
+    try
+    {
+        db << "CREATE TABLE IF NOT EXISTS Series (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255), maxSeries INT, currentSeries INT);";
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }
 
 std::vector<Series> SQLiteSeriesDAL::loadSeries()
 {
+    std::vector<Series> series;
     try
     {
         db << "SELECT name, maxSeries, currentSeries FROM Series;"
         >> [&](std::string name, int maxSeries, int currentSeries) {
-            std::cout << name << std::endl;
+            series.push_back(Series(name, maxSeries));
         };
     }
-    catch(std::exception& e)
+    catch(const std::exception& e)
     {
         std::cout << e.what() << std::endl;
     }
 
-    return std::vector<Series>();
+    return series;
 }
 
-void SQLiteSeriesDAL::saveSeries(std::vector<Series> series)
+void SQLiteSeriesDAL::saveSeries(Series s)
 {
-
+try
+    {
+        db << "INSERT INTO Series(name, maxSeries, currentSeries) VALUES (?, ?, ?);"
+        << s.getName()
+        << s.getNoOfSeries()
+        << s.getCurrentSeries();
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }
 

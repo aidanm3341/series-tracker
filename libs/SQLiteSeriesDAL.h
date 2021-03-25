@@ -11,7 +11,7 @@ class SQLiteSeriesDAL : public SeriesDAL
     public:
         SQLiteSeriesDAL();
         std::vector<Series> loadSeries();
-        void saveSeries(std::vector<Series> series);
+        void saveSeries(Series series);
 };
 
 #endif

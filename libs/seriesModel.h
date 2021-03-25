@@ -4,11 +4,16 @@
 #include <vector>
 #include <series.h>
 
+#include <seriesDAL.h>
+#include <SQLiteSeriesDAL.h>
+
 class SeriesModel
 {
     std::vector<Series> series;
     int activeItem;
-    int maxNumberOfSeries;
+
+    SeriesDAL *dal;
+    SQLiteSeriesDAL sqldal;
 
     public:
         SeriesModel();
