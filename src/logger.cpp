@@ -6,7 +6,7 @@
 Logger::Logger()
 {
     
-    file.open("seriestracker.log", std::ios::out);
+    file.open(std::string(std::getenv("HOME")) + ".seriestracker.log", std::ios::out);
     std::string line;
  
     // Backup streambuffers of  cout

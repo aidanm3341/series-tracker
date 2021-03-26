@@ -1,6 +1,7 @@
 #include <SQLiteSeriesDAL.h>
+#include <cstdlib>
 
-SQLiteSeriesDAL::SQLiteSeriesDAL() : db(sqlite::database("series.db"))
+SQLiteSeriesDAL::SQLiteSeriesDAL() : db(sqlite::database(std::string(std::getenv("HOME")) + "/.series.db"))
 {
     try
     {
