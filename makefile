@@ -23,5 +23,8 @@ ${EXE_PATH}: ${SRC_FILES}
 
 all: ${EXE_PATH}
 
+install: ${EXE_PATH}
+	cp ${EXE_PATH} /usr/local/bin
+
 clean:
 	@rm -f ${EXE_PATH}
