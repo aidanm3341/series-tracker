@@ -1,8 +1,9 @@
-# Series Tracker
+# Series Tracker  [![C/C++ CI](https://github.com/aidanm3341/series-tracker/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/aidanm3341/series-tracker/actions/workflows/c-cpp.yml)
+
 This project has a make file, so the project can be built with just running ``` make ``` in the directory containing 'makefile'.
 You can then install the program by running ``` make install ```
 
-The executable output will then be located under out/ and called series\_tracker.
+Once installation has completed, you can run the program by typing "series_tracker" in the terminal.
 
 ## How to Use
 You can add a new series to track by pressing the ```a``` key. This will then prompt you to enter a name (which doesn't already exist in the app), and then the number of series that it has.
