@@ -67,7 +67,9 @@ void SeriesController::startLoop()
 {
     int ch;
 
-    while((ch = getch()) != KEY_F(1))
+    // 27 is the code for escape. But due to the way curses works, there is a delay between when it is pressed and when it goes through
+    // See section 5.2.16 here https://www.gnu.org/software/guile-ncurses/manual/html_node/Getting-characters-from-the-keyboard.html
+    while((ch = getch()) != KEY_F(1) && ch != 'q' && ch != 27)  
     {
         //std::cout << "Hello bitch" << std::endl;
         switch(ch)
