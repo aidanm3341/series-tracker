@@ -1,3 +1,5 @@
+name: Move new issue to KanBan
+
 on:
   issues:
     types: [opened]
@@ -9,4 +11,4 @@ jobs:
         uses: peter-evans/create-or-update-project-card@v1
         with:
           project-name: Series Tracker KanBan
-          column-name: To Do
+          column-name: To do
