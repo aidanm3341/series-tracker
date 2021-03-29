@@ -11,3 +11,7 @@ You can add a new series to track by pressing the ```a``` key. This will then pr
 You can scroll through the series with the up and down arrows. Once you have your selected series, you can add or remove marks on the checkboxes with the left and right arrows.
 
 If you want to delete a series for whatever reason, select it and press the ```d``` key. This will then prompt you to check if you're sure, where you can then type 'y' or 'n' to confirm or cancel it. 
+
+## Screenshots
+
+![Main Screen](res/screenshot.png)
