@@ -12,7 +12,7 @@ You can scroll through the series with the up and down arrows. Once you have you
 
 If you want to delete a series for whatever reason, select it and press the ```d``` key. This will then prompt you to check if you're sure, where you can then type 'y' or 'n' to confirm or cancel it. 
 
-You can exit the program by pressing the F1 Key.
+You can exit the program by pressing the the ```q``` key, or the ```ESC``` key, or the ```F1``` Key.
 
 ## Screenshots
 
