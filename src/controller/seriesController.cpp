@@ -5,6 +5,64 @@
 SeriesController::SeriesController(SeriesView& v, SeriesModel& m) : view(v) , model(m)
 {}
 
+void SeriesController::add()
+{
+    std::string name;
+    bool isValidInput = true;
+    name = view.promptUser("Name - ");
+    for(Series s : model.getSeries())
+        if(name == s.getName())
+            isValidInput = false;
+    
+    while(!isValidInput)
+    {
+        name = view.promptUser("Series with that name exists already, try again - ");
+        for(Series s : model.getSeries())
+        if(name == s.getName())
+            isValidInput = false;
+    }
+    
+    int noOfSeries = 0;
+    isValidInput = false;
+    try
+    {
+        noOfSeries = std::stoi(view.promptUser("Number of series - "));
+    }
+    catch(std::exception err)
+    {
+        while(!isValidInput)
+        {
+            try
+            {
+                noOfSeries = std::stoi(view.promptUser("Enter a valid number of series - "));
+                isValidInput = true;
+            }
+            catch(std::exception err)
+            {}
+        }
+    }
+
+    model.addNewSeries(name, noOfSeries);
+    view.refresh();
+}
+
+void SeriesController::remove()
+{
+    std::string response;
+    bool isValidInput = false;
+    while(!isValidInput)
+    {
+        response = view.promptUser("Are you sure you want to delete? (y/n) - ");
+        if(response == "y" || response == "n")
+            isValidInput = true;
+    }
+    if(response == "y")
+    {
+        model.deleteActiveSeries();
+    }
+    view.refresh();
+}
+
 void SeriesController::startLoop()
 {
     int ch;
@@ -30,64 +88,12 @@ void SeriesController::startLoop()
                 model.decrementSeries();
                 view.refresh();
                 break;
-
-            case 'a': {
-                std::string name;
-                bool isValidInput = true;
-                name = view.promptUser("Name - ");
-                for(Series s : model.getSeries())
-                    if(name == s.getName())
-                        isValidInput = false;
-                
-                while(!isValidInput)
-                {
-                    name = view.promptUser("Series with that name exists already, try again - ");
-                    for(Series s : model.getSeries())
-                    if(name == s.getName())
-                        isValidInput = false;
-                }
-                
-                int noOfSeries = 0;
-                isValidInput = false;
-                try
-                {
-                    noOfSeries = std::stoi(view.promptUser("Number of series - "));
-                }
-                catch(std::exception err)
-                {
-                    while(!isValidInput)
-                    {
-                        try
-                        {
-                            noOfSeries = std::stoi(view.promptUser("Enter a valid number of series - "));
-                            isValidInput = true;
-                        }
-                        catch(std::exception err)
-                        {}
-                    }
-                }
-
-                model.addNewSeries(name, noOfSeries);
-                view.refresh();
+            case 'a': 
+                add();
                 break;
-            }
-
-            case 'd': {
-                std::string response;
-                bool isValidInput = false;
-                while(!isValidInput)
-                {
-                    response = view.promptUser("Are you sure you want to delete? (y/n) - ");
-                    if(response == "y" || response == "n")
-                        isValidInput = true;
-                }
-                if(response == "y")
-                {
-                    model.deleteActiveSeries();
-                }
-                view.refresh();
+            case 'd': 
+                remove();
                 break;
-            }
 		}
     }
 }

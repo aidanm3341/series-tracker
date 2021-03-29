@@ -9,6 +9,9 @@ class SeriesController
     SeriesView& view;
     SeriesModel& model;
 
+    void add();
+    void remove();
+
     public:
         SeriesController(SeriesView& view, SeriesModel& model);
 
