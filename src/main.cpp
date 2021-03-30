@@ -18,12 +18,6 @@ int main()
 {
     Logger logger;
 
-    SeriesDAL *dal;
-    SQLiteSeriesDAL sqldal = SQLiteSeriesDAL();
-    dal = &sqldal;
-
-    dal->loadSeries();
-
     CursesApp app;
 
     SeriesModel model;
