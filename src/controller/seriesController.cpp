@@ -43,7 +43,6 @@ void SeriesController::add()
     }
 
     model.addNewSeries(name, noOfSeries);
-    view.refresh();
 }
 
 void SeriesController::remove()
@@ -60,7 +59,6 @@ void SeriesController::remove()
     {
         model.deleteActiveSeries();
     }
-    view.refresh();
 }
 
 void SeriesController::startLoop()
@@ -76,19 +74,15 @@ void SeriesController::startLoop()
 		{	
 			case KEY_UP:
 				model.setActiveItem((model.getActiveItem()-1 + model.getSeries().size()) % model.getSeries().size());
-                view.refresh();
 				break;
 			case KEY_DOWN:
 				model.setActiveItem((model.getActiveItem()+1) % model.getSeries().size());
-                view.refresh();
 				break;	
             case KEY_RIGHT:
                 model.incrementSeries();
-                view.refresh();
                 break;
             case KEY_LEFT:
                 model.decrementSeries();
-                view.refresh();
                 break;
             case 'a': 
                 add();
@@ -97,5 +91,6 @@ void SeriesController::startLoop()
                 remove();
                 break;
 		}
+        view.refresh();
     }
 }

@@ -2,6 +2,8 @@
 #include <window.h>
 
 #include <sstream>
+#include <math.h>
+#include <algorithm>
 
 SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(stdscr)), 
                                                     model(m), maxNameLength(0), 
@@ -56,9 +58,10 @@ std::string SeriesView::createSeriesNumberBarString()
     return output.str();
 }
 
-void SeriesView::printAllSeries()
+void SeriesView::printAllSeriesInRange(int lower, int upper)
 {
-    for (int i = 0; i < model.getSeries().size(); i++)
+    upper = std::min(upper, (int) model.getSeries().size()); // for when there is a page with less than a full page size.
+    for (int i = lower; i < upper; i++)
     {
         Series s = model.getSeries()[i];
         if(i == model.getActiveItem())
@@ -72,6 +75,12 @@ void SeriesView::printAllSeries()
     }
 }
 
+void SeriesView::printCurrentPage()
+{
+    int currentPage = floor(model.getActiveItem() / PAGE_SIZE);
+    printAllSeriesInRange(currentPage * PAGE_SIZE, (currentPage+1) * PAGE_SIZE);
+}
+
 void SeriesView::refresh()
 {
     seriesWindow.clear();
@@ -79,7 +88,7 @@ void SeriesView::refresh()
 
     seriesWindow << createSeriesNumberBarString().c_str();
 
-    printAllSeries();
+    printCurrentPage();
 
     titleWindow.show();
     seriesWindow.show();
