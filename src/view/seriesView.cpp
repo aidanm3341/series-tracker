@@ -74,7 +74,7 @@ void SeriesView::printAllSeries()
 
 void SeriesView::refresh()
 {
-    clear();
+    seriesWindow.clear();
     updateMaxNameLength();
 
     seriesWindow << createSeriesNumberBarString().c_str();
@@ -84,11 +84,6 @@ void SeriesView::refresh()
     titleWindow.show();
     seriesWindow.show();
     inputWindow.show();
-}
-
-void SeriesView::clear()
-{
-    seriesWindow.clear();
 }
 
 std::string SeriesView::promptUser(std::string prompt)

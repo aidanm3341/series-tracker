@@ -29,7 +29,6 @@ class SeriesView
     public:
         SeriesView(SeriesModel& model);
         void refresh();
-        void clear();
         std::string promptUser(std::string prompt);
 };
 
