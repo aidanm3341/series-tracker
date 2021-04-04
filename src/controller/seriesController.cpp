@@ -59,6 +59,7 @@ void SeriesController::remove()
     if(response == "y")
     {
         model.deleteActiveSeries();
+        model.setActiveItem(model.getActiveItem()-1);
     }
     view.refresh();
 }
