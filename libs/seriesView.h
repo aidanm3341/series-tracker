@@ -14,8 +14,6 @@ const static std::string WATCHED_SERIES   = "[X]";
 const static int CHECKBOX_SPACING = 1;
 const static int SPACE_BETWEEN_NAME_AND_CHECKBOXES = 1;
 
-const static int PAGE_SIZE = 5;
-
 class SeriesView
 {
     int cols, rows;
@@ -23,7 +21,10 @@ class SeriesView
     SeriesModel& model;
     int maxNameLength;
 
+    int pageSize;
+
     void updateMaxNameLength();
+    void updatePageSize();
     std::string createWatchedBoxesString(Series s);
     std::string createSeriesNumberBarString();
     void printAllSeriesInRange(int lower, int upper);

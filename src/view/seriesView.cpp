@@ -9,11 +9,13 @@ SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(std
                                                     model(m), maxNameLength(0), 
                                                     titleWindow (3     , cols, 0, 0), 
                                                     seriesWindow(rows-6, cols, 3, 0), 
-                                                    inputWindow (3     , cols, rows-3, 0)
+                                                    inputWindow (3     , cols, rows-3, 0),
+                                                    pageSize(0)
 {
     titleWindow.print(TITLE.c_str());
 
     updateMaxNameLength();
+    updatePageSize();
 }
 
 void SeriesView::updateMaxNameLength()
@@ -21,6 +23,11 @@ void SeriesView::updateMaxNameLength()
     for (Series s : model.getSeries())
         if(s.getName().length() > maxNameLength)
             maxNameLength = s.getName().length();
+}
+
+void SeriesView::updatePageSize()
+{
+    pageSize = seriesWindow.getRows() - 3;
 }
 
 std::string SeriesView::createWatchedBoxesString(Series s)
@@ -61,6 +68,7 @@ std::string SeriesView::createSeriesNumberBarString()
 void SeriesView::printAllSeriesInRange(int lower, int upper)
 {
     upper = std::min(upper, (int) model.getSeries().size()); // for when there is a page with less than a full page size.
+
     for (int i = lower; i < upper; i++)
     {
         Series s = model.getSeries()[i];
@@ -77,14 +85,22 @@ void SeriesView::printAllSeriesInRange(int lower, int upper)
 
 void SeriesView::printCurrentPage()
 {
-    int currentPage = floor(model.getActiveItem() / PAGE_SIZE);
-    printAllSeriesInRange(currentPage * PAGE_SIZE, (currentPage+1) * PAGE_SIZE);
+    int currentPage = floor(model.getActiveItem() / pageSize);
+
+    if(currentPage > 0)
+        seriesWindow << std::string(' ', floor(maxNameLength/2)).c_str() << "^\n";
+        
+    printAllSeriesInRange(currentPage * pageSize, (currentPage+1) * pageSize);
+
+    if(currentPage <= floor(model.getSeries().size() / pageSize))
+        seriesWindow << std::string(' ', floor(maxNameLength/2)).c_str() << "v\n";
 }
 
 void SeriesView::refresh()
 {
     seriesWindow.clear();
     updateMaxNameLength();
+    updatePageSize();
 
     seriesWindow << createSeriesNumberBarString().c_str();
 

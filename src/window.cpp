@@ -64,3 +64,8 @@ std::string Window::input(int y, int x)
     noecho();
     return std::string(input);
 }
+
+int Window::getRows()
+{
+    return getmaxy(contentWindow);
+}

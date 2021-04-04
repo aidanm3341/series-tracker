@@ -21,6 +21,7 @@ class Window
         void clear();
         void move(int y, int x);
         std::string input(int y, int x);
+        int getRows();
 };
 
 Window& operator<<(Window& win, const char * str);
