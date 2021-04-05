@@ -16,14 +16,14 @@ class Window
         ~Window();
 
         void show();
-        void print(const char * str);
-        void printWithAttr(const char * str, ATTR attr);
+        void print(std::string str);
+        void printWithAttr(std::string str, ATTR attr);
         void clear();
         void move(int y, int x);
         std::string input(int y, int x);
         int getRows();
 };
 
-Window& operator<<(Window& win, const char * str);
+Window& operator<<(Window& win, std::string str);
 
 #endif

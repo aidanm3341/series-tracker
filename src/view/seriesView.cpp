@@ -12,7 +12,7 @@ SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(std
                                                     inputWindow (3     , cols, rows-3, 0),
                                                     pageSize(0)
 {
-    titleWindow.print(TITLE.c_str());
+    titleWindow.print(TITLE);
 
     updateMaxNameLength();
     updatePageSize();
@@ -73,12 +73,12 @@ void SeriesView::printAllSeriesInRange(int lower, int upper)
     {
         Series s = model.getSeries()[i];
         if(i == model.getActiveItem())
-            seriesWindow.printWithAttr(s.getName().c_str(), Window::ATTR::REVERSE);
+            seriesWindow.printWithAttr(s.getName(), Window::ATTR::REVERSE);
         else
-            seriesWindow << s.getName().c_str();
+            seriesWindow << s.getName();
 
-        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ').c_str()
-               << createWatchedBoxesString(s).c_str()
+        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ')
+               << createWatchedBoxesString(s)
                << "\n";
     }
 }
@@ -89,12 +89,12 @@ void SeriesView::printCurrentPage()
     int maxPage = ceil((model.getSeries().size()-1) / pageSize);
 
     if(currentPage > 0)
-        seriesWindow << std::string(maxNameLength/2, ' ').c_str() << "^\n";
+        seriesWindow << std::string(maxNameLength/2, ' ') << "^\n";
         
     printAllSeriesInRange(currentPage * pageSize, (currentPage+1) * pageSize);
 
     if(currentPage < maxPage)
-        seriesWindow << std::string(maxNameLength/2, ' ').c_str() << "v\n";
+        seriesWindow << std::string(maxNameLength/2, ' ') << "v\n";
 }
 
 void SeriesView::refresh()
@@ -103,7 +103,7 @@ void SeriesView::refresh()
     updateMaxNameLength();
     updatePageSize();
 
-    seriesWindow << createSeriesNumberBarString().c_str();
+    seriesWindow << createSeriesNumberBarString();
 
     printCurrentPage();
 
@@ -114,7 +114,7 @@ void SeriesView::refresh()
 
 std::string SeriesView::promptUser(std::string prompt)
 {
-    inputWindow << prompt.c_str();
+    inputWindow << prompt;
     std::string output = inputWindow.input(0, prompt.length());
     inputWindow.clear();
     return output;
