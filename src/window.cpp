@@ -16,12 +16,12 @@ void Window::show()
     wrefresh(contentWindow);
 }
 
-void Window::print(const char * str)
+void Window::print(std::string str)
 {
-    wprintw(contentWindow, str);
+    wprintw(contentWindow, str.c_str());
 }
 
-void Window::printWithAttr(const char * str, ATTR attr)
+void Window::printWithAttr(std::string str, ATTR attr)
 {
     wattron(contentWindow, attr);
     print(str);
@@ -36,7 +36,7 @@ Window::~Window()
     delwin(contentWindow);
 }
 
-Window& operator<<(Window& win, const char * str)
+Window& operator<<(Window& win, std::string str)
 {
     win.print(str);
     return win;
@@ -63,4 +63,9 @@ std::string Window::input(int y, int x)
     curs_set(0);
     noecho();
     return std::string(input);
+}
+
+int Window::getRows()
+{
+    return getmaxy(contentWindow);
 }

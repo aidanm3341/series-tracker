@@ -21,15 +21,18 @@ class SeriesView
     SeriesModel& model;
     int maxNameLength;
 
+    int pageSize;
+
     void updateMaxNameLength();
+    void updatePageSize();
     std::string createWatchedBoxesString(Series s);
     std::string createSeriesNumberBarString();
-    void printAllSeries();
+    void printAllSeriesInRange(int lower, int upper);
+    void printCurrentPage();
 
     public:
         SeriesView(SeriesModel& model);
         void refresh();
-        void clear();
         std::string promptUser(std::string prompt);
 };
 

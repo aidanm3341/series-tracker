@@ -2,16 +2,20 @@
 #include <window.h>
 
 #include <sstream>
+#include <math.h>
+#include <algorithm>
 
 SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(stdscr)), 
                                                     model(m), maxNameLength(0), 
                                                     titleWindow (3     , cols, 0, 0), 
                                                     seriesWindow(rows-6, cols, 3, 0), 
-                                                    inputWindow (3     , cols, rows-3, 0)
+                                                    inputWindow (3     , cols, rows-3, 0),
+                                                    pageSize(0)
 {
-    titleWindow.print(TITLE.c_str());
+    titleWindow.print(TITLE);
 
     updateMaxNameLength();
+    updatePageSize();
 }
 
 void SeriesView::updateMaxNameLength()
@@ -19,6 +23,11 @@ void SeriesView::updateMaxNameLength()
     for (Series s : model.getSeries())
         if(s.getName().length() > maxNameLength)
             maxNameLength = s.getName().length();
+}
+
+void SeriesView::updatePageSize()
+{
+    pageSize = seriesWindow.getRows() - 3;
 }
 
 std::string SeriesView::createWatchedBoxesString(Series s)
@@ -56,44 +65,56 @@ std::string SeriesView::createSeriesNumberBarString()
     return output.str();
 }
 
-void SeriesView::printAllSeries()
+void SeriesView::printAllSeriesInRange(int lower, int upper)
 {
-    for (int i = 0; i < model.getSeries().size(); i++)
+    upper = std::min(upper, (int) model.getSeries().size()); // for when there is a page with less than a full page size.
+
+    for (int i = lower; i < upper; i++)
     {
         Series s = model.getSeries()[i];
         if(i == model.getActiveItem())
-            seriesWindow.printWithAttr(s.getName().c_str(), Window::ATTR::REVERSE);
+            seriesWindow.printWithAttr(s.getName(), Window::ATTR::REVERSE);
         else
-            seriesWindow << s.getName().c_str();
+            seriesWindow << s.getName();
 
-        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ').c_str()
-               << createWatchedBoxesString(s).c_str()
+        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ')
+               << createWatchedBoxesString(s)
                << "\n";
     }
 }
 
+void SeriesView::printCurrentPage()
+{
+    int currentPage = floor(model.getActiveItem() / pageSize);
+    int maxPage = ceil((model.getSeries().size()-1) / pageSize);
+
+    if(currentPage > 0)
+        seriesWindow << std::string(maxNameLength/2, ' ') << "^\n";
+        
+    printAllSeriesInRange(currentPage * pageSize, (currentPage+1) * pageSize);
+
+    if(currentPage < maxPage)
+        seriesWindow << std::string(maxNameLength/2, ' ') << "v\n";
+}
+
 void SeriesView::refresh()
 {
-    clear();
+    seriesWindow.clear();
     updateMaxNameLength();
+    updatePageSize();
 
-    seriesWindow << createSeriesNumberBarString().c_str();
+    seriesWindow << createSeriesNumberBarString();
 
-    printAllSeries();
+    printCurrentPage();
 
     titleWindow.show();
     seriesWindow.show();
     inputWindow.show();
 }
 
-void SeriesView::clear()
-{
-    seriesWindow.clear();
-}
-
 std::string SeriesView::promptUser(std::string prompt)
 {
-    inputWindow << prompt.c_str();
+    inputWindow << prompt;
     std::string output = inputWindow.input(0, prompt.length());
     inputWindow.clear();
     return output;
