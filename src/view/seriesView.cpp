@@ -86,14 +86,15 @@ void SeriesView::printAllSeriesInRange(int lower, int upper)
 void SeriesView::printCurrentPage()
 {
     int currentPage = floor(model.getActiveItem() / pageSize);
+    int maxPage = ceil((model.getSeries().size()-1) / pageSize);
 
     if(currentPage > 0)
-        seriesWindow << std::string(' ', floor(maxNameLength/2)).c_str() << "^\n";
+        seriesWindow << std::string(maxNameLength/2, ' ').c_str() << "^\n";
         
     printAllSeriesInRange(currentPage * pageSize, (currentPage+1) * pageSize);
 
-    if(currentPage <= floor(model.getSeries().size() / pageSize))
-        seriesWindow << std::string(' ', floor(maxNameLength/2)).c_str() << "v\n";
+    if(currentPage < maxPage)
+        seriesWindow << std::string(maxNameLength/2, ' ').c_str() << "v\n";
 }
 
 void SeriesView::refresh()
