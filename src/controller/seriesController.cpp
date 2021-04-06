@@ -73,15 +73,19 @@ void SeriesController::startLoop()
         switch(ch)
 		{	
 			case KEY_UP:
+            case 'k':
 				model.setActiveItem((model.getActiveItem()-1 + model.getSeries().size()) % model.getSeries().size());
 				break;
 			case KEY_DOWN:
+            case 'j':
 				model.setActiveItem((model.getActiveItem()+1) % model.getSeries().size());
 				break;	
             case KEY_RIGHT:
+            case 'l':
                 model.incrementSeries();
                 break;
             case KEY_LEFT:
+            case 'h':
                 model.decrementSeries();
                 break;
             case 'a': 
