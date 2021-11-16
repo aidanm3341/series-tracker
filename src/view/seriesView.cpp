@@ -18,6 +18,11 @@ SeriesView::SeriesView(SeriesModel& m) : cols(getmaxx(stdscr)), rows(getmaxy(std
     updatePageSize();
 }
 
+inline std::string SeriesView::spaces(int numberOfSpaces)
+{
+    return std::string(numberOfSpaces, ' ');
+}
+
 void SeriesView::updateMaxNameLength()
 {
     for (Series s : model.getSeries())
@@ -33,13 +38,13 @@ void SeriesView::updatePageSize()
 std::string SeriesView::createWatchedBoxesString(Series s)
 {
     std::stringstream output;
-    output << std::string(SPACE_BETWEEN_NAME_AND_CHECKBOXES, ' ');
+    output << spaces(SPACE_BETWEEN_NAME_AND_CHECKBOXES);
     for (size_t i = 0; i < s.getNoOfSeries(); i++)
     {
         if(s.haveWatchedSeries(i))
-            output << WATCHED_SERIES << std::string(CHECKBOX_SPACING, ' ');
+            output << WATCHED_SERIES << spaces(CHECKBOX_SPACING);
         else
-            output << UNWATCHED_SERIES << std::string(CHECKBOX_SPACING, ' ');
+            output << UNWATCHED_SERIES << spaces(CHECKBOX_SPACING);
     }
     return output.str();
 }
@@ -47,19 +52,19 @@ std::string SeriesView::createWatchedBoxesString(Series s)
 std::string SeriesView::createSeriesNumberBarString()
 {
     std::stringstream output;
-    output << std::string(maxNameLength, ' ') 
-           << std::string(SPACE_BETWEEN_NAME_AND_CHECKBOXES, ' ');
+    output << spaces(maxNameLength) 
+           << spaces(SPACE_BETWEEN_NAME_AND_CHECKBOXES);
            
 
     for (size_t i = 0; i < model.getMaxNumberOfSeries(); i++)
     {
         if(i < 9)
-            output << std::string(WATCHED_SERIES.length()/2, ' ');
+            output << spaces(WATCHED_SERIES.length()/2);
         else
-            output << std::string(WATCHED_SERIES.length()/2 - 1, ' ');
+            output << spaces(WATCHED_SERIES.length()/2 - 1);
         output << i+1
-               << std::string(WATCHED_SERIES.length()/2, ' ')
-               << std::string(CHECKBOX_SPACING, ' ');
+               << spaces(WATCHED_SERIES.length()/2)
+               << spaces(CHECKBOX_SPACING);
     }
     output << "\n";
     return output.str();
@@ -77,7 +82,7 @@ void SeriesView::printAllSeriesInRange(int lower, int upper)
         else
             seriesWindow << s.getName();
 
-        seriesWindow << std::string(maxNameLength - s.getName().length(), ' ')
+        seriesWindow << spaces(maxNameLength - s.getName().length())
                << createWatchedBoxesString(s)
                << "\n";
     }
@@ -89,12 +94,12 @@ void SeriesView::printCurrentPage()
     int maxPage = ceil((model.getSeries().size()-1) / pageSize);
 
     if(currentPage > 0)
-        seriesWindow << std::string(maxNameLength/2, ' ') << "^\n";
+        seriesWindow << spaces(maxNameLength/2) << "^\n";
         
     printAllSeriesInRange(currentPage * pageSize, (currentPage+1) * pageSize);
 
     if(currentPage < maxPage)
-        seriesWindow << std::string(maxNameLength/2, ' ') << "v\n";
+        seriesWindow << spaces(maxNameLength/2) << "v\n";
 }
 
 void SeriesView::refresh()

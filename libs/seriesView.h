@@ -30,6 +30,8 @@ class SeriesView
     void printAllSeriesInRange(int lower, int upper);
     void printCurrentPage();
 
+    inline std::string spaces(int numberOfSpaces);
+
     public:
         SeriesView(SeriesModel& model);
         void refresh();
