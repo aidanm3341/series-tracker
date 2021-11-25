@@ -25,6 +25,7 @@ inline std::string SeriesView::spaces(int numberOfSpaces)
 
 void SeriesView::updateMaxNameLength()
 {
+    maxNameLength = 0;
     for (Series s : model.getSeries())
         if(s.getName().length() > maxNameLength)
             maxNameLength = s.getName().length();
